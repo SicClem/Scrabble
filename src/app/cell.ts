@@ -1,8 +1,10 @@
+import {Letter} from './letter';
+
 export class Cell {
 
-  letter: string[];
+  letter: Letter[];
 
-  constructor(letter: string[]) {
+  constructor(letter: Letter[]) {
     this.letter = letter;
   }
 }

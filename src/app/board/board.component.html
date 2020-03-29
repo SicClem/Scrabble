@@ -1,7 +1,5 @@
 <div class="container">
-  <div class="gameBoard"
-
-  >
+  <div class="gameBoard">
     <div *ngFor="let cell of this.grid; index as j"
          class="cell"
          cdkDropList
@@ -11,14 +9,16 @@
          (cdkDropListDropped)="drop($event)"
     >
       <div *ngFor="let l of cell.letter"
-        cdkDrag
+           class="letter"
+           cdkDrag
       >
-        {{ l }}
+        {{ l.letter }}
       </div>
     </div>
   </div>
   <div class="easels"
        cdkDropList
+       cdkDropListOrientation="horizontal"
        #easel="cdkDropList"
        [cdkDropListData]="easels"
        [cdkDropListConnectedTo]="LIST_IDS"
@@ -28,7 +28,7 @@
          class="letter"
          cdkDrag
     >
-      {{ l }}
+      {{ l.letter }}
     </div>
   </div>
 </div>
