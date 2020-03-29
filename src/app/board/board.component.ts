@@ -11,7 +11,7 @@ import {Cell} from '../cell';
 })
 export class BoardComponent implements OnInit {
 
-  grid: any[] = [];
+  grid: Cell[] = [];
   easels: string[] = [];
   LIST_IDS: any = [];
 
@@ -25,18 +25,32 @@ export class BoardComponent implements OnInit {
     this.generateEaselLetter();
   }
 
+
+  /**
+   * Used to param the drag&drop's recipients.
+   * @param j : number is the index of the cell.
+   * return the index and add to LIST_IDS the template variable of the cell.
+   */
   addId(j) {
     this.LIST_IDS.push('cdk-drop-list-' + j);
     return + j;
   }
 
+  /**
+   * Used to generate the grid's cells.
+   */
   generateCells() {
     for (let i = 1; i <= 441; i++) {
       const cell = new Cell([]);
-      this.grid.push(cell.cell);
+      this.grid.push(cell);
     }
   }
 
+
+  /**
+   * Angular Material's Drag&drop function.
+   * @param event is the user's drag.
+   */
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -49,6 +63,10 @@ export class BoardComponent implements OnInit {
     console.log(this.grid);
   }
 
+
+  /**
+   * Used to generate random letters for the easel.
+   */
   randomLetter() {
     const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
       'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -56,6 +74,10 @@ export class BoardComponent implements OnInit {
     return alphabet[index];
   }
 
+
+  /**
+   * Used to fill the easel with 7 random letters.
+   */
   generateEaselLetter() {
     for (let i = 0 ; i < 7 ; i++) {
       this.easels.push(this.randomLetter());
