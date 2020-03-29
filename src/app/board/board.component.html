@@ -11,24 +11,28 @@
          (cdkDropListDropped)="drop($event)"
     >
       <div *ngFor="let e of g"
-        cdkDrag
+           cdkDrag
+           class="letter"
       >
         {{ e }}
       </div>
     </div>
   </div>
-  <div class="easels"
-       cdkDropList
-       #easel="cdkDropList"
-       [cdkDropListData]="easels"
-       [cdkDropListConnectedTo]="LIST_IDS"
-       (cdkDropListDropped)="drop($event)"
-  >
-    <div *ngFor="let l of this.easels"
-         class="letter"
-         cdkDrag
+  <div class="easelsContainer">
+    <div class="easels"
+         cdkDropList
+         cdkDropListOrientation="horizontal"
+         #easel="cdkDropList"
+         [cdkDropListData]="easels"
+         [cdkDropListConnectedTo]="LIST_IDS"
+         (cdkDropListDropped)="drop($event)"
     >
-      {{ l }}
+      <div *ngFor="let l of this.easels"
+           class="letter"
+           cdkDrag
+      >
+        {{ l }}
+      </div>
     </div>
   </div>
 </div>
