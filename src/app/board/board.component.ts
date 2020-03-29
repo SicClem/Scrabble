@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Cell} from '../cell';
+import {Letter} from '../letter';
 
 
 
@@ -12,16 +13,18 @@ import {Cell} from '../cell';
 export class BoardComponent implements OnInit {
 
   grid: Cell[] = [];
-  easels: string[] = [];
-  LIST_IDS: any = [];
+  easels: Letter[] = [];
+  LIST_IDS: string[] = [];
+  letterBag: Letter[] = [];
 
   constructor() {
   }
 
 
   ngOnInit() {
+    this.bagFiller();
     this.generateCells();
-    console.log(this.grid);
+    console.log(this.letterBag);
     this.generateEaselLetter();
   }
 
@@ -49,7 +52,7 @@ export class BoardComponent implements OnInit {
    * Angular Material's Drag&drop function.
    * @param event is the user's drag.
    */
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<Letter[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -58,17 +61,14 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
-    console.log(this.grid);
   }
 
   /**
    * Used to generate random letters for the easel.
    */
   randomLetter() {
-    const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
-      'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    const index = Math.floor(Math.random() * alphabet.length);
-    return alphabet[index];
+    const index = Math.floor(Math.random() * this.letterBag.length);
+    return this.letterBag[index];
   }
 
   /**
@@ -78,6 +78,43 @@ export class BoardComponent implements OnInit {
     for (let i = 0 ; i < 7 ; i++) {
       this.easels.push(this.randomLetter());
     }
+  }
+
+  letterParameter(letter: string, nbLetter: number, value: number) {
+    for (let i = 0 ; i < nbLetter ; i ++) {
+      const l = new Letter(letter, value);
+      this.letterBag.push(l);
+    }
+  }
+
+  bagFiller() {
+    this.letterParameter('A', 9, 1);
+    this.letterParameter('B', 2, 3);
+    this.letterParameter('C', 2, 3);
+    this.letterParameter('D', 3, 2);
+    this.letterParameter('E', 15, 1);
+    this.letterParameter('F', 2, 4);
+    this.letterParameter('G', 2, 2);
+    this.letterParameter('H', 2, 4);
+    this.letterParameter('I', 8, 1);
+    this.letterParameter('J', 1, 8);
+    this.letterParameter('K', 1, 10);
+    this.letterParameter('L', 5, 1);
+    this.letterParameter('M', 3, 2);
+    this.letterParameter('N', 6, 1);
+    this.letterParameter('O', 6, 1);
+    this.letterParameter('P', 2, 3);
+    this.letterParameter('Q', 1, 8);
+    this.letterParameter('R', 6, 1);
+    this.letterParameter('S', 6, 1);
+    this.letterParameter('T', 6, 1);
+    this.letterParameter('U', 6, 1);
+    this.letterParameter('V', 2, 4);
+    this.letterParameter('W', 1, 10);
+    this.letterParameter('X', 1, 10);
+    this.letterParameter('Y', 1, 1);
+    this.letterParameter('Z', 1, 1);
+    this.letterParameter('', 2, 0);
   }
 
 }
