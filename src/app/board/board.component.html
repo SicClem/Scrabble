@@ -1,38 +1,34 @@
 <div class="container">
-  <div class="gameBoard"
-
-  >
-    <div *ngFor="let g of this.grid; index as j"
+  <div class="gameBoard">
+    <div *ngFor="let cell of this.grid; index as j"
          class="cell"
          cdkDropList
          [attr.id]="addId(j)"
-         [cdkDropListData]="g"
+         [cdkDropListData]="cell.letter"
          [cdkDropListConnectedTo]="[easel]"
          (cdkDropListDropped)="drop($event)"
     >
-      <div *ngFor="let e of g"
-           cdkDrag
-           class="letter"
-      >
-        {{ e }}
-      </div>
-    </div>
-  </div>
-  <div class="easelsContainer">
-    <div class="easels"
-         cdkDropList
-         cdkDropListOrientation="horizontal"
-         #easel="cdkDropList"
-         [cdkDropListData]="easels"
-         [cdkDropListConnectedTo]="LIST_IDS"
-         (cdkDropListDropped)="drop($event)"
-    >
-      <div *ngFor="let l of this.easels"
+      <div *ngFor="let l of cell.letter"
            class="letter"
            cdkDrag
       >
         {{ l }}
       </div>
+    </div>
+  </div>
+  <div class="easels"
+       cdkDropList
+       cdkDropListOrientation="horizontal"
+       #easel="cdkDropList"
+       [cdkDropListData]="easels"
+       [cdkDropListConnectedTo]="LIST_IDS"
+       (cdkDropListDropped)="drop($event)"
+  >
+    <div *ngFor="let l of this.easels"
+         class="letter"
+         cdkDrag
+    >
+      {{ l }}
     </div>
   </div>
 </div>

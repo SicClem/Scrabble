@@ -1,8 +1,8 @@
 export class Cell {
 
-  cell: string[];
+  letter: string[];
 
-  constructor(cell: string[]) {
-    this.cell = cell;
+  constructor(letter: string[]) {
+    this.letter = letter;
   }
 }
