@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-easels',
   templateUrl: './easels.component.html',
-  styleUrls: ['./easels.component.scss']
+  styleUrl: './easels.component.scss'
 })
-export class EaselsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class EaselsComponent {
 }

@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {Cell} from '../cell';
-import {Letter} from '../letter';
-
-
+import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Cell } from '../cell';
+import { Letter } from '../letter';
 
 @Component({
   selector: 'app-board',
+  imports: [DragDropModule],
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  styleUrl: './board.component.scss'
 })
 export class BoardComponent implements OnInit {
 
@@ -17,14 +16,9 @@ export class BoardComponent implements OnInit {
   LIST_IDS: string[] = [];
   letterBag: Letter[] = [];
 
-  constructor() {
-  }
-
-
   ngOnInit() {
     this.bagFiller();
     this.generateCells();
-    console.log(this.letterBag);
     this.generateEaselLetter();
   }
 
@@ -33,9 +27,9 @@ export class BoardComponent implements OnInit {
    * @param j : number is the index of the cell.
    * return the index and add to LIST_IDS the template variable of the cell.
    */
-  addId(j) {
+  addId(j: number) {
     this.LIST_IDS.push('cdk-drop-list-' + j);
-    return + j;
+    return +j;
   }
 
   /**
@@ -49,7 +43,7 @@ export class BoardComponent implements OnInit {
   }
 
   /**
-   * Angular Material's Drag&drop function.
+   * Angular CDK Drag&drop function.
    * @param event is the user's drag.
    */
   drop(event: CdkDragDrop<Letter[]>) {
@@ -66,7 +60,7 @@ export class BoardComponent implements OnInit {
   /**
    * Used to generate random letters for the easel.
    */
-  randomLetter() {
+  randomLetter(): Letter {
     const index = Math.floor(Math.random() * this.letterBag.length);
     return this.letterBag[index];
   }
@@ -75,13 +69,13 @@ export class BoardComponent implements OnInit {
    * Used to fill the easel with 7 random letters.
    */
   generateEaselLetter() {
-    for (let i = 0 ; i < 7 ; i++) {
+    for (let i = 0; i < 7; i++) {
       this.easels.push(this.randomLetter());
     }
   }
 
   letterParameter(letter: string, nbLetter: number, value: number) {
-    for (let i = 0 ; i < nbLetter ; i ++) {
+    for (let i = 0; i < nbLetter; i++) {
       const l = new Letter(letter, value);
       this.letterBag.push(l);
     }
@@ -116,5 +110,4 @@ export class BoardComponent implements OnInit {
     this.letterParameter('Z', 1, 1);
     this.letterParameter('', 2, 0);
   }
-
 }
